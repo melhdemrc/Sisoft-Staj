@@ -13,6 +13,7 @@ Proje, RAG (Retrieval-Augmented Generation) mimarisini temel almaktadır. Klasik
 
 Proje, geliştirme sürecine göre modüler bir yapıda organize edilmiştir:
 
+```
 Melih_Demirci_Staj_Projesi/
 │
 ├── 2.Hafta_RAG_Backend/          # ARKA PLAN (RAG Motoru ve Veri İşleme)
@@ -29,7 +30,7 @@ Melih_Demirci_Staj_Projesi/
 │   └── requirements.txt          # Gerekli Kütüphaneler
 │
 └── README.md                     # Proje Dokümantasyonu
-
+```
 
 ## Kurulum ve Çalıştırma
 
@@ -107,7 +108,3 @@ Arka planda çalışan motor, kullanıcı dostu bir web arayüzüne entegre edil
 
 * **Veri Gizliliği:** Tüm veriler `chroma_db_storage` klasöründe yerel olarak tutulur, buluta veri gönderilmez.
 * **Kapsam:** Sistem sadece yüklenen FMF Klinik Rehberi kapsamındaki sorulara yanıt verir. Kapsam dışı sorular güvenlik duvarına takılır.
-
-```
-
-```
