@@ -25,8 +25,10 @@ Melih_Demirci_Staj_Projesi/
 │   └── data_source/              # Ham tıbbi metinler
 │
 ├── 3.Hafta_RAG_Frontend/         # ARAYÜZ (Streamlit, Hafıza ve Güvenlik)
+│   ├── 01_arayuz_tasarimi.py     # ANA UYGULAMA (Başlangıç)
+│   ├── 02_rag_entegrasyonu.py     # ANA UYGULAMA (Geliştirme)
 │   ├── 03_hafiza_entegrasyonu.py # ANA UYGULAMA (Final Kod)
-│   ├── fix_and_update.py         # Veritabanı Onarım Aracı
+│   ├── fix_and_update.py
 │   └── requirements.txt          # Gerekli Kütüphaneler
 │
 └── README.md                     # Proje Dokümantasyonu
