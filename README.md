@@ -1,43 +1,113 @@
-# RAG Uygulamaları - Hafta 2
 
-Bu proje, Sisoft staj programının ikinci haftası kapsamında geliştirilen, doküman tabanlı bir soru-cevap (RAG - Retrieval-Augmented Generation) sistemidir. Proje, yerel veri kaynaklarını kullanarak anlamlı metin parçalama, vektör veri tabanı oluşturma ve bağlama dayalı yanıt üretme süreçlerini kapsamaktadır.
+# Ailevi Akdeniz Ateşi (FMF) Klinik Karar Destek Sistemi
 
-## Proje Yapısı
+**Geliştirici:** Melih Demirci  
+**Tarih:** Şubat 2026  
+**Konsept:** Sisoft Staj Programı Projesi
 
-Proje, iş akışına göre sıralanmış beş ana modülden oluşmaktadır:
+Bu proje, Ailevi Akdeniz Ateşi (FMF) hastalığına özel klinik rehber verilerini kullanarak, sağlık profesyonelleri ve hastalar için geliştirilmiş yapay zeka destekli bir Klinik Karar Destek Sistemidir.
 
-1. **01_veri_ve_chunking_test.py**: Veri kaynaklarının okunması ve metinlerin işlenebilir parçalara (chunking) ayrılması.
-2. **02_embedding_ve_db.py**: Metin parçalarının vektörlere dönüştürülmesi ve ChromaDB üzerine kaydedilmesi.
-3. **03_sorgulama_testi.py**: Vektör veri tabanı üzerinde semantik arama testlerinin yapılması.
-4. **04_prompt_tasarimi.py**: LLM için bağlam (context) içeren dinamik prompt yapısının oluşturulması.
-5. **05_final_prototip.py**: Tüm sürecin birleştirildiği interaktif sağlık asistanı simülasyonu.
+Proje, RAG (Retrieval-Augmented Generation) mimarisini temel almaktadır. Klasik yapay zeka modellerinin aksine, cevaplar modelin eğitim verisinden değil, yerel bir vektör veritabanında tutulan güncel tıbbi rehberlerden referans alınarak üretilir. "Local-First" (Önce Yerel) prensibiyle çalıştığı için veri gizliliğini esas alır ve internet bağlantısına ihtiyaç duymadan çalışabilir.
 
-## Kurulum
+## Proje Klasör Yapısı
 
-Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları takip edebilirsiniz:
+Proje, geliştirme sürecine göre modüler bir yapıda organize edilmiştir:
 
-1. Python ortamını hazırlayın ve bağımlılıkları yükleyin:
-   ```bash
-   pip install -r requirements.txt
-   ```
+Melih_Demirci_Staj_Projesi/
+│
+├── 2.Hafta_RAG_Backend/          # ARKA PLAN (RAG Motoru ve Veri İşleme)
+│   ├── 01_veri_ve_chunking_test.py
+│   ├── 02_embedding_ve_db.py
+│   ├── 03_sorgulama_testi.py
+│   ├── 04_prompt_tasarimi.py
+│   ├── 05_final_prototip.py
+│   └── data_source/              # Ham tıbbi metinler
+│
+├── 3.Hafta_RAG_Frontend/         # ARAYÜZ (Streamlit, Hafıza ve Güvenlik)
+│   ├── 03_hafiza_entegrasyonu.py # ANA UYGULAMA (Final Kod)
+│   ├── fix_and_update.py         # Veritabanı Onarım Aracı
+│   └── requirements.txt          # Gerekli Kütüphaneler
+│
+└── README.md                     # Proje Dokümantasyonu
 
-2. Vektör veri tabanını oluşturun:
-   ```bash
-   python 02_embedding_ve_db.py
-   ```
 
-3. Final prototipini başlatın:
-   ```bash
-   python 05_final_prototip.py
-   ```
+## Kurulum ve Çalıştırma
+
+Projeyi yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyin:
+
+### 1. Gereksinimlerin Yüklenmesi
+
+Projenin çalışması için gerekli Python kütüphanelerini yükleyin:
+
+```bash
+pip install -r 3.Hafta_RAG_Frontend/requirements.txt
+
+```
+
+### 2. Veritabanının Oluşturulması
+
+Vektör veritabanını sıfırdan kurmak veya güncellemek için onarım scriptini çalıştırın:
+
+```bash
+cd 3.Hafta_RAG_Frontend
+python fix_and_update.py
+
+```
+
+*(Bu işlem data_source içindeki metinleri okur, parçalar ve ChromaDB'ye kaydeder.)*
+
+### 3. Uygulamanın Başlatılması
+
+Arayüzü çalıştırmak için Streamlit komutunu kullanın:
+
+```bash
+streamlit run 03_hafiza_entegrasyonu.py
+
+```
+
+## Geliştirme Süreci ve Modüller
+
+Proje iki ana fazda geliştirilmiştir:
+
+### Hafta 2: RAG Mimarisi ve Backend (Arka Plan)
+
+Bu aşamada doküman tabanlı soru-cevap sisteminin mantıksal motoru inşa edilmiştir.
+
+* **01_veri_ve_chunking_test.py:** Ham tıbbi metinlerin okunması ve yapay zeka için anlamlı küçük parçalara (chunking) ayrılması.
+* **02_embedding_ve_db.py:** Metin parçalarının sayısal vektörlere (embedding) dönüştürülmesi ve ChromaDB vektör veritabanına kaydedilmesi.
+* **03_sorgulama_testi.py:** Veritabanı üzerinde semantik (anlamsal) arama testlerinin yapılması.
+* **04_prompt_tasarimi.py:** LLM (Büyük Dil Modeli) için bağlam (context) içeren dinamik prompt yapılarının kurgulanması.
+* **05_final_prototip.py:** Terminal tabanlı çalışan ilk prototip.
+
+### Hafta 3: Frontend, Güvenlik ve Hafıza (Arayüz)
+
+Arka planda çalışan motor, kullanıcı dostu bir web arayüzüne entegre edilmiş ve akıllı özelliklerle donatılmıştır.
+
+* **Modern Web Arayüzü:** Streamlit kullanılarak geliştirilen, profesyonel CSS tasarımına sahip kullanıcı paneli.
+* **Sohbet Hafızası (Session Memory):** Asistanın geçmiş konuşmaları hatırlamasını sağlayan durum yönetimi.
+* **Hibrit Güvenlik (Guardrails):**
+* **Keyword Filter:** Tıbbi olmayan soruları (Örn: "Araba fiyatları") kelime köküne bakarak engeller.
+* **Fuzzy Matching:** Kullanıcı yazım hatalarını (Örn: "Kolsisin") tolere eder ve düzeltir.
+
+
+* **Performans Optimizasyonu:** `@st.cache_resource` ile modelin sadece bir kez yüklenmesi sağlanarak sorgu hızı artırılmıştır.
 
 ## Kullanılan Teknolojiler
 
-* **LangChain**: RAG iş akışının yönetimi ve doküman işleme.
-* **ChromaDB**: Vektör verilerinin depolanması ve hızlı erişim.
-* **HuggingFace**: Cümlelerin vektör temsillerine dönüştürülmesi (sentence-transformers/all-MiniLM-L6-v2).
+| Teknoloji | Amaç |
+| --- | --- |
+| **Python** | Ana programlama dili |
+| **Streamlit** | Web arayüzü ve ön yüz geliştirme |
+| **LangChain** | RAG akış yönetimi ve doküman işleme |
+| **ChromaDB** | Vektör verilerinin yerel olarak saklanması |
+| **HuggingFace** | `sentence-transformers/all-MiniLM-L6-v2` embedding modeli |
+| **Difflib** | Yazım hataları için bulanık eşleşme algoritması |
 
 ## Notlar
 
-* Verilerin saklandığı yerel dizin: `chroma_db_storage`
-* Test sonuçları ve loglar: `test_results`
+* **Veri Gizliliği:** Tüm veriler `chroma_db_storage` klasöründe yerel olarak tutulur, buluta veri gönderilmez.
+* **Kapsam:** Sistem sadece yüklenen FMF Klinik Rehberi kapsamındaki sorulara yanıt verir. Kapsam dışı sorular güvenlik duvarına takılır.
+
+```
+
+```
