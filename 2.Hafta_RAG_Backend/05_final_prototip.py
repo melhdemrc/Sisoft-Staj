@@ -8,7 +8,7 @@ DB_PATH = "chroma_db_storage"
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 def main():
-    print("=== RAG SAĞLIK ASİSTANI PROTOTİPİ (v1.0) ===")
+    print("=== RAG SAĞLIK ASİSTANI PROTOTİPİ ===")
     print("Sistem yükleniyor, lütfen bekleyin...\n")
 
     if not os.path.exists(DB_PATH):
